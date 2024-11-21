@@ -4,21 +4,29 @@ import { PairMaker } from "./parser/PairMaker.js";
 import { SourceCode } from "./parser/SourceCode.js";
 import { IgnoreNodeManager } from "textlint-rule-helper";
 
-const report = (context) => {
+const report = (context, options) => {
     const { Syntax, report, RuleError } = context;
+
+    const defaultIgnoreChildrenTypes = [
+        Syntax.CodeBlock,
+        Syntax.Code,
+        Syntax.Link,
+        Syntax.Strong,
+        Syntax.Emphasis,
+        Syntax.BlockQuote,
+        Syntax.Comment
+    ];
+
+    const notIgnoreChildrenTypes = options.notIgnoreChildrenTypes || [];
+    const ignoreChildrenTypes = defaultIgnoreChildrenTypes.filter(
+        (defaultIgnoreChildrenType) => !notIgnoreChildrenTypes.includes(defaultIgnoreChildrenType)
+    );
+
     const ignoreNodeManager = new IgnoreNodeManager();
     return {
         [Syntax.Paragraph](node) {
             const sentences = splitAST(node);
-            ignoreNodeManager.ignoreChildrenByTypes(node, [
-                Syntax.CodeBlock,
-                Syntax.Code,
-                Syntax.Link,
-                Syntax.Strong,
-                Syntax.Emphasis,
-                Syntax.BlockQuote,
-                Syntax.Comment
-            ]);
+            ignoreNodeManager.ignoreChildrenByTypes(node, ignoreChildrenTypes);
             sentences.children
                 .filter((node) => node.type === SentenceSplitterSyntax.Sentence)
                 .forEach((sentence) => {
