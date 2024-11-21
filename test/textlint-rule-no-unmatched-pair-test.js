@@ -14,7 +14,7 @@ tester.run("textlint-rule-no-unmatched-pair", rule, {
         "`(` is ok.",
         "文字列リテラルには3種類ありますが、まずは`\"`（ダブルクオート）と`'`（シングルクオート）について見ていきます。",
         `a is b.
-        
+
 \`"\`（ダブルクオート）と\`'\`（シングルクオート）に意味的な違いはありません。
 この書籍では、\`"\`（ダブルクオート）を主に文字列リテラルとして利用します。`,
         `そのため、Todoアイテムの状態を更新するには、HTML要素にTodoアイテムの情報（タイトルや識別子となるidなど）をすべて埋め込む必要があります。
@@ -48,7 +48,7 @@ tester.run("textlint-rule-no-unmatched-pair", rule, {
                 {
                     index: 4,
                     message: `Cannot find a pairing character for （.
-                    
+
 You should close this sentence with ）.
 This pair of marks is called 丸括弧（）.`
                 }
@@ -60,7 +60,7 @@ This pair of marks is called 丸括弧（）.`
                 {
                     index: 11,
                     message: `Cannot find a pairing character for ".
-                    
+
 You should close this sentence with ".
 This pair of marks is called double quote.`
                 }
@@ -88,8 +88,8 @@ This pair of marks is called double quote.`
         },
         {
             text: `DUMMY DUUMY.
-            
-            
+
+
 このように\`count\`変数が自動解放されずに保持できているのは「（\`increment\`）関数が外側のスコープにある（\`count\`）変数への参照を保持できる」ためです。このような性質のことをクロージャー(関数閉包）と呼びます。クロージャーは静的スコープと変数は参照され続けていればデータは保持されるという2つの性質によって成り立っています。`,
             errors: [
                 {

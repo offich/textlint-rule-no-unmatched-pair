@@ -40,7 +40,7 @@ const report = (context) => {
                             node,
                             new RuleError(
                                 `Cannot find a pairing character for ${contextLocation.pairMark.start}.
-                    
+
 You should close this sentence with ${contextLocation.pairMark.end}.
 This pair of marks is called ${contextLocation.pairMark.key}.`,
                                 {
